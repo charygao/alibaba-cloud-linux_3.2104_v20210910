@@ -10,9 +10,8 @@
 
 ```Alibaba Cloud Linux 3```镜像发布记录：https://help.aliyun.com/document_detail/212634.htm?spm=a2c4g.11186623.0.0.17e82bf7MmbbFz#concept-2070819
 
-准备1台ECS服务器```4核>8G```预安装```Alibaba Cloud Linux  3.2104 64位```，内核版本如下：
+准备1台配置```4核 内存>=8G```的ECS服务器预安装```Alibaba Cloud Linux  3.2104 64位```，内核版本如下：
 ```bash
-root@master01: ~ 22:48:56
 # uname -a
 Linux master01 5.10.60-9.al8.x86_64 #1 SMP Fri Apr 23 16:56:08 CST 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
