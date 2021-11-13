@@ -63,7 +63,7 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system  # 生效
 
-# Step.3 修改主机名称
+# Step.3 修改主机名称，后面需要用到（172.16.51.97替换内网IP）
 hostnamectl set-hostname master01
 cat >> /etc/hosts << EOF
 172.16.51.97 master01
@@ -102,7 +102,7 @@ ExecStart=
 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS
 ################################################################################
 
-# Step.8 初始化单机集群，172.16.51.97换成内网IP地址，其他不变
+# Step.8 初始化单机集群（172.16.51.97替换内网IP），其他不变
 kubeadm init \
 --apiserver-advertise-address=172.16.51.97 \
 --image-repository registry.aliyuncs.com/google_containers \
