@@ -164,7 +164,6 @@ kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/class.yaml
 ````
 - 安装```redis-standalone```，切换到```root```执行：
-- 
 ```bash
 # config
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.6/standalone/redis-standalone-config.yaml
@@ -176,3 +175,12 @@ kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.6/standalone/redis-standalone-deployment.yaml
 ```
 #### 故障复现
+```bash
+# 找到 redis节点容器，类似```k8s_redis-standalone_redis-standalone-76657f87cb-dngb5_redis_fd9b470b-4e10-4a63-8917-eb37b9186337_7```
+
+# 找到对应容器ID，进入容器内部
+docker exec -it 775c7c9ee1e1 /bin/bash
+
+# 执行压力测试，用100个线程发送10万个请求：
+redis-benchmark -h 127.0.0.1 -p 6379 -a 123?456 -c 100 -n 100000
+```
