@@ -119,7 +119,7 @@ kubectl describe node master01 | grep Taints
 kubectl taint nodes master01 node-role.kubernetes.io/master-
 
 # Step.11
-# 分别找到以下两个文件中的```--port=0```，注释掉即可。
+# 分别找到以下两个文件中的 --port=0，注释掉即可。
 vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 vim /etc/kubernetes/manifests/kube-scheduler.yaml
 
