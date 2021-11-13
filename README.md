@@ -88,10 +88,7 @@ systemctl enable kubelet && systemctl start kubelet
 # Step.7
 mkdir /etc/systemd/system/kubelet.service.d
 vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-# 内容
-# Note: This dropin only works with kubeadm and kubelet v1.11+
-# 注意：这里的文件是手动添加的，好像没有自动生成，缺失的话会导致 kubeadm init 失败
-# Created by Zhadan on 2021.08.28
+################################################################################
 [Service]
 Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf"
 Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml"
@@ -102,6 +99,22 @@ EnvironmentFile=-/var/lib/kubelet/kubeadm-flags.env
 EnvironmentFile=-/etc/default/kubelet
 ExecStart=
 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS
+################################################################################
+
+# Step.8
+# 分别找到以下两个文件中的```--port=0```，注释掉即可。
+vim /etc/kubernetes/manifests/kube-controller-manager.yaml
+vim /etc/kubernetes/manifests/kube-scheduler.yaml
+
+# Step.9 检查集群健康状态
+root@master01: ~ 10:24:41
+# kubectl get cs
+Warning: v1 ComponentStatus is deprecated in v1.19+
+NAME                 STATUS    MESSAGE                         ERROR
+scheduler            Healthy   ok                              
+controller-manager   Healthy   ok                              
+etcd-0               Healthy   {"health":"true","reason":""}  
+
 ```
 - 安装```k8s -> caclio```
 - 安装```k8s -> redis```
