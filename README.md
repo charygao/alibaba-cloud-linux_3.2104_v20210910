@@ -118,8 +118,7 @@ source ~/.bash_profile
 kubectl describe node master01 | grep Taints
 kubectl taint nodes master01 node-role.kubernetes.io/master-
 
-# Step.11
-# 分别找到以下两个文件中的 --port=0，注释掉即可。
+# Step.11 分别找到以下两个文件中的 --port=0，注释掉即可。
 vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 vim /etc/kubernetes/manifests/kube-scheduler.yaml
 
@@ -129,7 +128,7 @@ kubectl get cs
 # Step.13 安装 Calico:v3.21.0 网络插件
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
-# Step.14 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还是有问题，说明安装失败）
+# Step.14 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还没恢复，说明安装失败，检查执行步骤是否有问题）
 kubectl get pods --all-namespaces -o wide
 ```
 - 安装```nfs```，切换到```root```执行：
@@ -143,7 +142,7 @@ mkdir -p /opt/nfs_data
 # Step.3 修改权限
 chmod -R 777 /opt/nfs_data
 
-# Step.4 修改配置
+# Step.4 修改配置，编辑内容
 vim /etc/exports
 # 内容
 /opt/nfs_data *(rw,no_root_squash,sync)
