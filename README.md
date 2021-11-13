@@ -101,12 +101,24 @@ ExecStart=
 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS
 ################################################################################
 
-# Step.8
+# Step.8 初始化单机集群，172.16.51.97换成内网IP地址，其他不变
+kubeadm init \
+--apiserver-advertise-address=172.16.51.97 \
+--image-repository registry.aliyuncs.com/google_containers \
+--kubernetes-version v1.22.3 \
+--service-cidr=10.96.0.0/12 \
+--pod-network-cidr=10.244.0.0/16
+
+# Step.9 初始化结束，执行
+echo 'export KUBECONFIG=/etc/kubernetes/admin.conf' >> ~/.bash_profile
+source ~/.bash_profile
+
+# Step.10
 # 分别找到以下两个文件中的```--port=0```，注释掉即可。
 vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 vim /etc/kubernetes/manifests/kube-scheduler.yaml
 
-# Step.9 检查集群健康状态
+# Step.11 检查集群健康状态
 root@master01: ~ 10:24:41
 # kubectl get cs
 Warning: v1 ComponentStatus is deprecated in v1.19+
@@ -115,6 +127,11 @@ scheduler            Healthy   ok
 controller-manager   Healthy   ok                              
 etcd-0               Healthy   {"health":"true","reason":""}  
 
+# Step.12 安装 Calico:v3.21.0 网络插件
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+# Step.13 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还是有问题，说明安装失败）
+kubectl get pods --all-namespaces -o wide
 ```
 - 安装```k8s -> caclio```
 - 安装```k8s -> redis```
