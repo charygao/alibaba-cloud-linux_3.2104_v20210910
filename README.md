@@ -175,6 +175,8 @@ kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.6/standalone/redis-standalone-deployment.yaml
 ```
 #### 故障复现
+- 使用内核版本```5.10.60-9.al8.x86_64 # v2021-09-10```
+
 ```bash
 # 找到 redis节点容器，类似```k8s_redis-standalone_redis-standalone-76657f87cb-dngb5_redis_fd9b470b-4e10-4a63-8917-eb37b9186337_7```
 
@@ -184,3 +186,7 @@ docker exec -it 775c7c9ee1e1 /bin/bash
 # 执行压力测试，用100个线程发送10万个请求：
 redis-benchmark -h 127.0.0.1 -p 6379 -a 123?456 -c 100 -n 100000
 ```
+执行压力测试后，系统负载异常。
+
+- 回退内核版本```5.10.23-4.al8.x86_64 # v2021-04-25```
+再次执行压力测试，系统没有出现负载异常。
