@@ -134,47 +134,43 @@ kubectl get pods --all-namespaces -o wide
 ```
 - 安装```nfs```，切换到```root```执行：
 ```bash
-# 检查 nfs 是否存在
-rpm -qa | grep nfs
-
-# 安装 nfs-utils
+# Step.1 安装 nfs-utils
 yum -y install nfs-utils
 
-# 创建共享目录
+# Step.2 创建共享目录
 mkdir -p /opt/nfs_data
 
-# 修改权限
+# Step.3 修改权限
 chmod -R 777 /opt/nfs_data
 
-# 修改配置
+# Step.4 修改配置
 vim /etc/exports
-
 # 内容
 /opt/nfs_data *(rw,no_root_squash,sync)
 
-# 生效
+# Step.5 生效
 exportfs -r
 ```
 - 安装```nfs-subdir-external-provisioner```，切换到```root```执行：
 ```bash
-## rbac.yml
+# Step.1 rbac.yml
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/rbac.yaml
 
-## deployment.yml
+# Step.2 deployment.yml
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/deployment.yaml
 
-## class.yml
+# Step.3 class.yml
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/class.yaml
 ````
 - 安装```redis-standalone```，切换到```root```执行：
 ```bash
-# config
+# Step.1 config
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.6/standalone/redis-standalone-config.yaml
 
-# claim
+# Step.2 claim
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.6/standalone/redis-standalone-claim.yaml
 
-# deployment
+# Step.3 deployment
 kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.6/standalone/redis-standalone-deployment.yaml
 ```
 #### 故障复现
