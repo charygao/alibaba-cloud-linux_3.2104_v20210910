@@ -178,7 +178,7 @@ kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/redis_6.2.
 - 使用内核版本```5.10.60-9.al8.x86_64 # v2021-09-10```
 
 ```bash
-# 找到 redis节点容器，类似以 k8s_POD_redis-standalone-*** 的容器
+# 找到 redis节点容器，类似以 k8s_POD_redis-standalone-*** 开头的容器 name
 docker ps
 
 # 找到对应容器ID，进入容器内部
