@@ -84,6 +84,24 @@ yum install -y kubeadm-1.20.11 kubelet-1.20.11 kubectl-1.20.11
 
 # Step.6 开机重启&启动
 systemctl enable kubelet && systemctl start kubelet
+
+# Step.7
+mkdir /etc/systemd/system/kubelet.service.d
+vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+# 内容
+# Note: This dropin only works with kubeadm and kubelet v1.11+
+# 注意：这里的文件是手动添加的，好像没有自动生成，缺失的话会导致 kubeadm init 失败
+# Created by Zhadan on 2021.08.28
+[Service]
+Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf"
+Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml"
+# This is a file that "kubeadm init" and "kubeadm join" generates at runtime, populating the KUBELET_KUBEADM_ARGS variable dynamically
+EnvironmentFile=-/var/lib/kubelet/kubeadm-flags.env
+# This is a file that the user can use for overrides of the kubelet args as a last resort. Preferably, the user should use
+# the .NodeRegistration.KubeletExtraArgs object in the configuration files instead. KUBELET_EXTRA_ARGS should be sourced from this file.
+EnvironmentFile=-/etc/default/kubelet
+ExecStart=
+ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS
 ```
 - 安装```k8s -> caclio```
 - 安装```k8s -> redis```
