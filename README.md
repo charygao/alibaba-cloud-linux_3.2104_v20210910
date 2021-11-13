@@ -31,7 +31,6 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
 # Step.3
-# 安装19.03.15-3.el8
 sudo yum install docker-ce-19.03.15-3.el8 docker-ce-cli-19.03.15-3.el8 containerd.io
 ```
 - 安装 kubernetes
