@@ -21,9 +21,7 @@ ARGUS_VERSION=3.5.3 /bin/bash -c "$(curl -s https://cms-agent-cn-hangzhou.oss-cn
 ```
 创建```noroot```账号```k8s```（名字随便取），具体授权步骤等省略...
 #### 安装 k8s 实验环境
-- 安装```docker```
-
-切换到 ```k8s```执行：
+- 安装```docker```，切换到 ```k8s```执行：
 ```bash
 # Step.1
 sudo yum install -y yum-utils
@@ -52,9 +50,7 @@ sudo systemctl enable docker # 开机启动
 sudo gpasswd -a $USER docker  #将当前用户添加至docker用户组
 newgrp docker                 #更新docker用户组
 ```
-- 安装```kubernetes```
-
-切换到```root```执行：
+- 安装```kubernetes```，切换到```root```执行：
 ```bash
 # Step.1 关闭防火墙
 systemctl stop firewalld && systemctl disable firewalld
