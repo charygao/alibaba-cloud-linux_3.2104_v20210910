@@ -129,8 +129,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 # Step.13 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还是有问题，说明安装失败）
 kubectl get pods --all-namespaces -o wide
 ```
-- 安装```nfs```
-```
+- 安装```nfs```，切换到```root```执行：
+```bash
 # 检查 nfs 是否存在
 rpm -qa | grep nfs
 
@@ -152,4 +152,16 @@ vim /etc/exports
 # 生效
 exportfs -r
 ```
+- 安装```nfs-subdir-external-provisioner```，切换到```root```执行：
+```bash
+## rbac.yml
+kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/rbac.yaml
+
+## deployment.yml
+kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/deployment.yaml
+
+## class.yml
+kubectl create -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/nfs-subdir-external-provisioner_v4.0.2/class.yaml
+
+````
 #### 故障复现
