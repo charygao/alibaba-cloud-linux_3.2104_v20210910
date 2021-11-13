@@ -21,7 +21,7 @@ ARGUS_VERSION=3.5.3 /bin/bash -c "$(curl -s https://cms-agent-cn-hangzhou.oss-cn
 ```
 创建```noroot```账号```k8s```（名字随便取），具体授权步骤等省略...
 #### 安装 k8s 实验环境
-- 安装 docker
+- 安装```docker```
 切换到 ```k8s```，执行
 ```bash
 # Step.1
@@ -33,7 +33,7 @@ sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/ce
 # Step.3
 sudo yum install docker-ce-19.03.15-3.el8 docker-ce-cli-19.03.15-3.el8 containerd.io
 ```
-- 安装 kubernetes
-- 安装 k8s -> caclio
-- 安装 k8s -> redis
+- 安装```kubernetes```
+- 安装```k8s -> caclio```
+- 安装```k8s -> redis```
 #### 故障复现
