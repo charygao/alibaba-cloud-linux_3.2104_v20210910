@@ -19,8 +19,21 @@ Linux master01 5.10.60-9.al8.x86_64 #1 SMP Fri Apr 23 16:56:08 CST 2021 x86_64 x
 # 有的主机可以选择不预选安装，这里为了保证测试环境一致，如果没有安装就手动安装一下。
 ARGUS_VERSION=3.5.3 /bin/bash -c "$(curl -s https://cms-agent-cn-hangzhou.oss-cn-hangzhou-internal.aliyuncs.com/Argus/agent_install_ecs-1.2.sh)"
 ```
+创建```noroot```账号```k8s```（名字随便取），具体授权步骤等省略...
 #### 安装 k8s 实验环境
 - 安装 docker
+切换到 ```k8s```，执行
+```bash
+# Step.1
+sudo yum install -y yum-utils
+
+# Step.2
+sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+# Step.3
+# 安装19.03.15-3.el8
+sudo yum install docker-ce-19.03.15-3.el8 docker-ce-cli-19.03.15-3.el8 containerd.io
+```
 - 安装 kubernetes
 - 安装 k8s -> caclio
 - 安装 k8s -> redis
