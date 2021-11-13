@@ -10,7 +10,7 @@
 
 ```Alibaba Cloud Linux 3```镜像发布记录：https://help.aliyun.com/document_detail/212634.htm?spm=a2c4g.11186623.0.0.17e82bf7MmbbFz#concept-2070819
 
-新购服务器```4核32G```预安装```Alibaba Cloud Linux  3.2104 64位```，内核版本如下：
+准备1台ECS服务器```4核>8G```预安装```Alibaba Cloud Linux  3.2104 64位```，内核版本如下：
 ```bash
 root@master01: ~ 22:48:56
 # uname -a
@@ -115,18 +115,22 @@ kubeadm init \
 echo 'export KUBECONFIG=/etc/kubernetes/admin.conf' >> ~/.bash_profile
 source ~/.bash_profile
 
-# Step.10
+# Step.10 单机部署，允许Master部署Pods
+kubectl describe node master01 | grep Taints
+kubectl taint nodes master01 node-role.kubernetes.io/master-
+
+# Step.11
 # 分别找到以下两个文件中的```--port=0```，注释掉即可。
 vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 vim /etc/kubernetes/manifests/kube-scheduler.yaml
 
-# Step.11 检查集群健康状态
+# Step.12 检查集群健康状态
 kubectl get cs
 
-# Step.12 安装 Calico:v3.21.0 网络插件
+# Step.13 安装 Calico:v3.21.0 网络插件
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
-# Step.13 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还是有问题，说明安装失败）
+# Step.14 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还是有问题，说明安装失败）
 kubectl get pods --all-namespaces -o wide
 ```
 - 安装```nfs```，切换到```root```执行：
