@@ -32,6 +32,24 @@ sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/ce
 
 # Step.3
 sudo yum install docker-ce-19.03.15-3.el8 docker-ce-cli-19.03.15-3.el8 containerd.io
+
+# Step.4
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://ckec7rg9.mirror.aliyuncs.com"],
+  "exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+
+# Step.5
+sudo systemctl daemon-reload # 加载配置文件
+sudo systemctl restart docker # 重启Docker
+sudo systemctl enable docker # 开机启动
+
+# Step.6
+sudo gpasswd -a $USER docker  #将当前用户添加至docker用户组
+newgrp docker                 #更新docker用户组
 ```
 - 安装```kubernetes```
 - 安装```k8s -> caclio```
