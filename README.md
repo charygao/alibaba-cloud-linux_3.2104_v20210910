@@ -119,13 +119,7 @@ vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 vim /etc/kubernetes/manifests/kube-scheduler.yaml
 
 # Step.11 检查集群健康状态
-root@master01: ~ 10:24:41
-# kubectl get cs
-Warning: v1 ComponentStatus is deprecated in v1.19+
-NAME                 STATUS    MESSAGE                         ERROR
-scheduler            Healthy   ok                              
-controller-manager   Healthy   ok                              
-etcd-0               Healthy   {"health":"true","reason":""}  
+kubectl get cs
 
 # Step.12 安装 Calico:v3.21.0 网络插件
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
