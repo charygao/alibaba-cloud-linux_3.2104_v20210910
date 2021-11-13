@@ -22,7 +22,7 @@ ARGUS_VERSION=3.5.3 /bin/bash -c "$(curl -s https://cms-agent-cn-hangzhou.oss-cn
 创建```noroot```账号```k8s```（名字随便取），具体授权步骤等省略...
 #### 安装 k8s 实验环境
 - 安装```docker```
-切换到 ```k8s```，执行
+切换到 ```k8s```执行：
 ```bash
 # Step.1
 sudo yum install -y yum-utils
@@ -52,6 +52,41 @@ sudo gpasswd -a $USER docker  #将当前用户添加至docker用户组
 newgrp docker                 #更新docker用户组
 ```
 - 安装```kubernetes```
+切换到```root```执行：
+```bash
+# Step.1 关闭防火墙
+systemctl stop firewalld && systemctl disable firewalld
+
+# Step.2 将桥接的IPv4流量传递到iptables的链
+cat > /etc/sysctl.d/k8s.conf << EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system  # 生效
+
+# Step.3 修改主机名称
+hostnamectl set-hostname master01
+cat >> /etc/hosts << EOF
+172.16.51.97 master01
+EOF
+
+# Step.4 配置镜像源
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+# Step.5 安装指定版本
+yum install -y kubeadm-1.20.11 kubelet-1.20.11 kubectl-1.20.11
+
+# Step.6 开机重启&启动
+systemctl enable kubelet && systemctl start kubelet
+```
 - 安装```k8s -> caclio```
 - 安装```k8s -> redis```
 #### 故障复现
