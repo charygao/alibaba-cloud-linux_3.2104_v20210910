@@ -129,6 +129,27 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 # Step.13 至此，安装完毕。查看节点信息（正常节点都会显示```running```，如果没有，稍微等下。超过10分钟还是有问题，说明安装失败）
 kubectl get pods --all-namespaces -o wide
 ```
-- 安装```k8s -> caclio```
-- 安装```k8s -> redis```
+- 安装```nfs```
+```
+# 检查 nfs 是否存在
+rpm -qa | grep nfs
+
+# 安装 nfs-utils
+yum -y install nfs-utils
+
+# 创建共享目录
+mkdir -p /opt/nfs_data
+
+# 修改权限
+chmod -R 777 /opt/nfs_data
+
+# 修改配置
+vim /etc/exports
+
+# 内容
+/opt/nfs_data *(rw,no_root_squash,sync)
+
+# 生效
+exportfs -r
+```
 #### 故障复现
