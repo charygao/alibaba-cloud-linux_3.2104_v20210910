@@ -11,7 +11,7 @@
 ```bash
 root@master01: ~ 22:48:56
 # uname -a
-Linux master01 5.10.23-5.al8.x86_64 #1 SMP Fri Apr 23 16:56:08 CST 2021 x86_64 x86_64 x86_64 GNU/Linux
+Linux master01 5.10.60-9.al8.x86_64 #1 SMP Fri Apr 23 16:56:08 CST 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
 安装阿里云主机插件
 ```bash
