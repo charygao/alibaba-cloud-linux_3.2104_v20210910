@@ -8,7 +8,7 @@
 
 ```Alibaba Cloud Linux 3```镜像发布记录：https://help.aliyun.com/document_detail/212634.htm?spm=a2c4g.11186623.0.0.17e82bf7MmbbFz#concept-2070819
 
-新购服务器```4核32G```预安装```Alibaba Cloud Linux  3.2104 64位```，内核版本如下。
+新购服务器```4核32G```预安装```Alibaba Cloud Linux  3.2104 64位```，内核版本如下：
 ```bash
 root@master01: ~ 22:48:56
 # uname -a
@@ -20,3 +20,8 @@ Linux master01 5.10.60-9.al8.x86_64 #1 SMP Fri Apr 23 16:56:08 CST 2021 x86_64 x
 ARGUS_VERSION=3.5.3 /bin/bash -c "$(curl -s https://cms-agent-cn-hangzhou.oss-cn-hangzhou-internal.aliyuncs.com/Argus/agent_install_ecs-1.2.sh)"
 ```
 #### 安装 k8s 实验环境
+- 安装 docker
+- 安装 kubernetes
+- 安装 k8s -> caclio
+- 安装 k8s -> redis
+#### 故障复现
