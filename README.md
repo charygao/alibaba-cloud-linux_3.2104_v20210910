@@ -83,7 +83,7 @@ EOF
 # Step.5 安装指定版本
 yum install -y kubeadm-1.20.11 kubelet-1.20.11 kubectl-1.20.11
 
-# Step.6 开机重启&启动
+# Step.6 开机启动
 systemctl enable kubelet && systemctl start kubelet
 
 # Step.7 创建10-kubeadm.conf文件，并编辑内容
