@@ -12,6 +12,8 @@
 
 ![image](https://user-images.githubusercontent.com/75599950/141662548-a47770ef-9549-4291-b015-8c0a671f3447.png)
 
+![image](https://user-images.githubusercontent.com/75599950/141662649-66a9961a-7669-40af-94c1-0679bf2be745.png)
+
 #### 故障猜测
 - 内核版本```5.10.60-9.al8.x86_64 # v2021-09-10```：在处理k8s容器方面存在内核Bug，不能及时```ACK```导致系统负载异常
 - 内核版本```5.10.23-4.al8.x86_64 # v2021-04-25```：正常
