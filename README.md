@@ -7,6 +7,7 @@
 ![Screenshot from 2021-11-13 22-56-43](https://user-images.githubusercontent.com/75599950/141662366-c271bb87-0b32-4f48-a6e4-912a24d7d9e8.png)
 <center>图：系统负载</center>
 
+
 ![Screenshot from 2021-11-10 12-08-35](https://user-images.githubusercontent.com/75599950/141662354-fc65c563-e02e-410f-87a8-3fb092898512.png)
 <center>图：宕机</center>
 
