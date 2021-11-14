@@ -5,11 +5,12 @@
 - 说明：实际上只是压测的时候能100%复现问题，其他在容器启动或者运行过程中，也会出现系统负载异常偏高，只不过相比压测的时候少点。
 
 ![Screenshot from 2021-11-13 22-56-43](https://user-images.githubusercontent.com/75599950/141662366-c271bb87-0b32-4f48-a6e4-912a24d7d9e8.png)
-<center>图：系统负载</center>
-
 
 ![Screenshot from 2021-11-10 12-08-35](https://user-images.githubusercontent.com/75599950/141662354-fc65c563-e02e-410f-87a8-3fb092898512.png)
-<center>图：宕机</center>
+
+![image](https://user-images.githubusercontent.com/75599950/141662545-6fd8f61e-16bc-488e-b49d-5eb4dbe439ba.png)
+
+![image](https://user-images.githubusercontent.com/75599950/141662548-a47770ef-9549-4291-b015-8c0a671f3447.png)
 
 #### 故障猜测
 - 内核版本```5.10.60-9.al8.x86_64 # v2021-09-10```：在处理k8s容器方面存在内核Bug，不能及时```ACK```导致系统负载异常
