@@ -204,3 +204,5 @@ redis-benchmark -h 127.0.0.1 -p 6379 -a 123?456 -c 100 -n 100000
 
 ![image](https://user-images.githubusercontent.com/75599950/141662595-5e48d5fd-8c70-4e3a-b9cc-de0b644b289c.png)
 
+![image](https://user-images.githubusercontent.com/75599950/141662688-66c15e56-2113-41be-82d0-1b16562873d6.png)
+
