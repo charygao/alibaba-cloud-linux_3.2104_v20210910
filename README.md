@@ -28,7 +28,7 @@ docker status
 
 ![Screenshot from 2021-11-10 12-08-35](https://user-images.githubusercontent.com/75599950/141662354-fc65c563-e02e-410f-87a8-3fb092898512.png)
 #### 死机场景2
-在进行下面的```k8s实验环境```安装的时候，跳过```NFS组件```、```redis-standalone```、```Calico:v3.21.0网络组件```安装。直接安装```flannel:v0.14.0网络组件```
+在进行下面的```k8s实验环境```安装的时候，跳过```NFS等2个组件```、```redis-standalone```、```Calico:v3.21.0网络组件```安装。直接安装```Flannel:v0.14.0网络组件```
 ```bash
 kubectl apply -f https://hy-raw.oss-cn-beijing.aliyuncs.com/k8s_docs/flannel_v0.14.0/kube-flannel.yml
 ```
