@@ -13,9 +13,9 @@
 ![image](https://user-images.githubusercontent.com/75599950/141662548-a47770ef-9549-4291-b015-8c0a671f3447.png)
 
 ![image](https://user-images.githubusercontent.com/75599950/141662649-66a9961a-7669-40af-94c1-0679bf2be745.png)
-#### 死机问题
+#### 死机问题（原因复杂）
 在系统负载异常偏高开始大概几秒钟以内，输入命令跟踪信息，反复输入几次，系统出现死机（在负载异常的同时，80%概率死机，即使当时没死机，重启后也会死机，也就是最终100%死机）。
-当时输入的命令就2条
+有一次是中午压测，下午都正常，到了晚上执行了一句 ```docker status```死机了。当时输入的命令就2条：
 ```bash
 # 查看所有节点信息
 kubectl get pods --all-namespaces -o wide
@@ -24,6 +24,7 @@ kubectl get pods --all-namespaces -o wide
 docker status
 ```
 远程连接无法操作，使用阿里云主机控制台 远程NFC 登录查看，显示如下：
+
 ![Screenshot from 2021-11-10 12-08-35](https://user-images.githubusercontent.com/75599950/141662354-fc65c563-e02e-410f-87a8-3fb092898512.png)
 #### 故障猜测
 - 内核版本```5.10.60-9.al8.x86_64 # v2021-09-10```：在处理k8s容器方面存在内核Bug，不能及时```ACK```导致系统负载异常
